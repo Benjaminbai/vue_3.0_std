@@ -42,3 +42,19 @@ vue 3.0 new featrues
             - onErrorCaptured
             - onRenderTracked
             - onRenderTriggered
+
+
+## 3.0 和2.0 的区别
+
+1. 重构响应式系统，使用Proxy替换Object.defineProperty，使用Proxy优势：
+    - 可直接监听数组类型的数据变化
+    - 监听的目标为对象本身，不需要像Object.defineProperty一样遍历每个属性，有一定的性能提升
+    - 可拦截apply、ownKeys、has等13种方法，而Object.defineProperty不行
+    - 直接实现对象属性的新增/删除
+2. 新增Composition API，更好的逻辑复用和代码组织
+3. 重构 Virtual DOM
+    - 模板编译时的优化，将一些静态节点编译成常量
+    - slot优化，将slot编译为lazy函数，将slot的渲染的决定权交给子组件
+    - 模板中内联事件的提取并重用（原本每次渲染都重新生成内联函数）
+4. 代码结构调整，更便于Tree shaking，使得体积更小
+5. 使用Typescript替换Flow
